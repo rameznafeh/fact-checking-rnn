@@ -8,7 +8,8 @@
 Ramez Nafeh
 ```
 
-
+Model diagram:
+![This is an image](Picture1.png)
 
 ## Abstract
 
