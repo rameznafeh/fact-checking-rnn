@@ -5,18 +5,18 @@
 # Fact-checking Using Deep Learning Architectures
 
 ```
-Ramez Nafeh
+Author: Ramez Nafeh
 ```
 
-Model diagram:
+Model Diagram:
 ![This is an image](Picture1.png)
 
 ## Abstract
 
 The aim of this assignment is to implement and experiment with several deep learning architectures to
 tackle the fact-checking task. The Keras API was used for pre-processing as well as the building and training
-of the models. In this report we will discuss our findings as well as what we considered to be our best
-models, after a number of combinations.
+of the models. In this report I will discuss findings as well as what I considered to be the best
+models, after a number of experiments
 
 ## Dataset Pre-processing
 
@@ -24,18 +24,18 @@ models, after a number of combinations.
 
 Since the dataset contains many special and non english characters, some cleaning needed to be done.
 (i) For what concerns **diacritics** and other **non-english characters** (such as in 'Krabbé', 'Königgrätz', etc.),
-we decided to keep them since they need to be matched against the evidence by the network and slightly
-improved performance at negligible cost. (ii) However we discarded the **Phonetic transcriptions** such as
-"tɔma bɑ̃ɡaltɛʁ" and tags such as '-lsb-' as they do not help with the classification. (iii) We experimented
+I decided to keep them since they need to be matched against the evidence by the network and slightly
+improved performance at negligible cost. (ii) However I discarded the **Phonetic transcriptions** such as
+"tɔma bɑ̃ɡaltɛʁ" and tags such as '-lsb-' as they do not help with the classification. (iii) I experimented
 with **lemmatization** but achieved minimal performance (<0.5% F1-score and val_accuracy) compared to
-its high cost, therefore we didn't use it. (iv) **Stopword removal** actually hurt performance badly (>5\%
+its high cost, therefore I didn't use it. (iv) **Stopword removal** actually hurt performance badly (>5\%
 val\_accuracy) even when keeping verbs, and that might be because fact checking requires a high level of
-precision. We evidently didn't use it. We used post-padding of sentences based on the 99th percentile of
+precision. I evidently didn't use it. I used post-padding of sentences based on the 99th percentile of
 sentence length.
 
 ### Word Embeddings
 
-For the word embeddings, we decided to leave it to the model to learn them since using pre-trained
+For the word embeddings, I decided to leave it to the model to learn them since using pre-trained
 embeddings such as Glove would have resulted in too many OOV words (>50\%).
 
 ## Models
@@ -58,15 +58,15 @@ The models were compiled using an ’adam’ optimizer and a ’binary crossentr
 ## Results
 
 Models were trained with a batch size of 1024 with Early stopping with a patience of 3 epochs. Tables and
-detailed results are in the python notebook however this is a summary: our findings showed that using
-the last state of an RNN, LSTM in our case, gave the best results for sentence embeddings. Out of the 3
+detailed results are in the python notebook however this is a summary: findings showed that using
+the last state of an RNN, LSTM in this case, gave the best results for sentence embeddings. Out of the 3
 input merging strategies, mean of the inputs performed the best, and cosine similarity as an added input
 slightly improved performance (~0.5%) in two cases or slightly hurt it (~0.5%) in one case which can
 probably be attributed to randomness.
 
 ## Discussion
 
-From the results we see that the F1 score was consistenlty better in all models for the
+From the results we can see that the F1 score was consistenlty better in all models for the
 SUPPORT class than for the REFUTE class, and that may be due to the class imbalance in
 the training set that favours the SUPPORT class. Moreover, while 8.7% of the claims had
 multiple evidences, given by:
